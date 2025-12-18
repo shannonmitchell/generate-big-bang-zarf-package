@@ -428,7 +428,7 @@ func findBBResources(t string) (map[string]string, []helmReleaseDependency, map[
 }
 
 // createBBManifests creates the manifests component for deploying Big Bang.
-func createBBManifests(ctx context.Context, airgap bool, manifestDir string, valuesFiles []string, additionalOverrideNames []string , version string, repo string) (v1alpha1.ZarfManifest, error) {
+func createBBManifests(ctx context.Context, airgap bool, manifestDir string, valuesFiles []string, additionalOverrideNames []string, version string, repo string) (v1alpha1.ZarfManifest, error) {
 	// Create a manifest component that we add to the zarf package for bigbang.
 	manifest := v1alpha1.ZarfManifest{
 		Name:      bb,
@@ -497,13 +497,13 @@ func createBBManifests(ctx context.Context, airgap bool, manifestDir string, val
 	// Add optional valuesFrom hooks to the bigbang helmrelease
 	for _, overrideName := range additionalOverrideNames {
 		hrValues = append(hrValues, fluxHelmCtrl.ValuesReference{
-			Kind: "ConfigMap",
-			Name: overrideName,
+			Kind:     "ConfigMap",
+			Name:     overrideName,
 			Optional: true,
 		})
 		hrValues = append(hrValues, fluxHelmCtrl.ValuesReference{
-			Kind: "Secret",
-			Name: overrideName,
+			Kind:     "Secret",
+			Name:     overrideName,
 			Optional: true,
 		})
 	}
